@@ -1,6 +1,6 @@
 # ERP360 SPA - Evaluación Técnica Simplificada para ERP BNS
 
- **SPA 360 SUCCESS**: Aplicación web de gestión de empresas con roles y permisos, desarrollada con **Ionic 6 + Angular Standalone** en el frontend y **Firebase Cloud Functions** (Node.js) en el backend.
+ **SPA 360 SUCCESS**: Aplicación web de gestión de empresas con roles y permisos, desarrollada con **Ionic 7.2 + Angular Standalone** en el frontend y **Firebase Cloud Functions** (Node.js) en el backend.
 
  Si desea observar este proyecto corriendo en productivo por favor sigue el siguiente enlace: [https://reto-erp360.web.app/](https://reto-erp360.web.app/)
 
