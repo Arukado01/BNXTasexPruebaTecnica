@@ -1,0 +1,7 @@
+ion-input.valid {
+  --highlight-color-focused: var(--ion-color-success);
+}
+
+ion-input.invalid {
+  --highlight-color-focused: var(--ion-color-danger);
+}

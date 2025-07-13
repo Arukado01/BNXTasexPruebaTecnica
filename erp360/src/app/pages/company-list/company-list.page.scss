@@ -1,0 +1,67 @@
+:host {
+    ion-content {
+        --background: #e7e7e7; // o cualquier color que desees
+    }
+}
+
+
+ion-card {
+    border-radius: 20px;
+}
+
+.list-card {
+    transition: all 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 0 20px rgba(40, 180, 235, 0.6), 0 0 25px rgba(160, 100, 255, 0.8);
+        border-radius: 20px;
+    }
+}
+
+.company-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+
+    th {
+        text-align: left;
+        padding: 8px;
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
+
+    td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+        background-color: #e0edff;
+    }
+}
+
+.animated-modal {
+    --height: auto;
+    --width: 90%;
+    --border-radius: 20px;
+    animation: modalFadeIn 0.3s ease-in-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}

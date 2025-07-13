@@ -1,0 +1,7 @@
+{
+  "name": "erp360",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

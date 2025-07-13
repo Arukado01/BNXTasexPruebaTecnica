@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "67d378b7-537a-442d-a9f0-85d2cb65a0e0",
+		"name": "ERP360 API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9578790",
+		"_collection_link": "https://lunar-station-657559.postman.co/workspace/urp~1db559ca-64be-428f-bd6e-5d8b8a08813d/collection/9578790-67d378b7-537a-442d-a9f0-85d2cb65a0e0?action=share&source=collection_link&creator=9578790"
+	},
+	"item": [
+		{
+			"name": "Seed Admin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/auth/seed-admin",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"seed-admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"pm.environment.set('idToken', jsonData.idToken);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"url": {
+					"raw": "{{baseUrlApi}}/auth/login",
+					"host": [
+						"{{baseUrlApi}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Company",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{idToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Empresa Prueba\",\n  \"nit\": \"123456789\",\n  \"emailAdmin\": \"admin+empresa1@example.com\",\n  \"password\": \"Admin123!\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrlApi}}/companies",
+					"host": [
+						"{{baseUrlApi}}"
+					],
+					"path": [
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Companies",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{idToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrlApi}}/companies",
+					"host": [
+						"{{baseUrlApi}}"
+					],
+					"path": [
+						"companies"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://api-nyxoaohhla-uca.a.run.app"
+		},
+		{
+			"key": "idToken",
+			"value": ""
+		}
+	]
+}

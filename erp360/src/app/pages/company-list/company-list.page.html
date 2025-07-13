@@ -1,0 +1,107 @@
+<app-menu></app-menu>
+
+<ion-header mode="ios" [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>SPA 360 SUCCESS - Evaluación Técnica Simplificada para ERP BNS</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openCreateModal()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="main-content" class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col size-md="9" size="12">
+        <ion-searchbar [(ngModel)]="searchTerm" mode="ios" placeholder="Buscar empresas"></ion-searchbar>
+      </ion-col>
+      <ion-col size-md="3" size="12" class="ion-text-end">
+        <ion-button mode="ios" expand="block" (click)="openCreateModal()" color="primary">
+          Agregar Empresa <ion-icon name="add" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card class="list-card ion-margin" mode="ios">
+    <ion-card-header color="primary">
+      <ion-card-title>Listado de Empresas</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-label>Registros por página</ion-label>
+        <ion-select [(ngModel)]="pageSize" interface="popover" (ionChange)="currentPage = 1">
+          <ion-select-option *ngFor="let size of [5, 10, 15, 20]" [value]="size">{{ size }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <table class="company-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>NIT</th>
+            <th>Usuario</th>
+            <th>Creación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of paginatedCompanies">
+            <td>{{ c.name }}</td>
+            <td>{{ c.nit }}</td>
+            <td>
+              <div *ngIf="c.ownerData">
+                {{ c.ownerData.displayName }} <br />
+                <small>{{ c.ownerData.email || 'Sin email' }}</small>
+              </div>
+              <em *ngIf="!c.ownerData">Cargando...</em>
+            </td>
+            <td>
+              {{ c.createdAt? formatDate(c.createdAt) : 'Sin fecha' }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="pagination ion-text-center ion-margin-top">
+        <ion-button fill="clear" (click)="prevPage()" [disabled]="currentPage === 1">Anterior</ion-button>
+
+        <ng-container *ngFor="let page of [].constructor(totalPages); let i = index">
+          <ion-button fill="clear" [color]="currentPage === i + 1 ? 'primary' : 'medium'" (click)="goToPage(i + 1)">
+            {{ i + 1 }}
+          </ion-button>
+        </ng-container>
+
+        <ion-button fill="clear" (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</ion-button>
+      </div>
+
+      <ion-spinner *ngIf="loading" class="ion-margin"></ion-spinner>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" mode="ios">
+    <ion-fab-button>
+      <ion-icon name="chevron-up-circle"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="openCreateModal()">
+        <ion-icon name="document"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="openThemeModal()">
+        <ion-icon name="color-palette"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="globe"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>
